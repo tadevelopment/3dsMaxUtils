@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ImportGroup Label="PropertySheets" />
+	<PropertyGroup Label="UserMacros">
+		<!-- selector for debug/release version -->
+		<IsDebug>$([System.Convert]::ToString( $([System.Text.RegularExpressions.Regex]::IsMatch($(Configuration), '[Dd]ebug'))))</IsDebug>
+		<IsRelease>$([System.Convert]::ToString( $([System.Text.RegularExpressions.Regex]::IsMatch($(Configuration), '[Rr]elease'))))</IsRelease>
+
+		<!-- variable contains max version -->
+		<MaxVersion>2012</MaxVersion>
+		<MaxVersion Condition="'$(Configuration.Contains(2012))'">2012</MaxVersion>
+		<MaxVersion Condition="'$(Configuration.Contains(2013))'">2013</MaxVersion>
+		<MaxVersion Condition="'$(Configuration.Contains(2014))'">2014</MaxVersion>
+		<MaxVersion Condition="'$(Configuration.Contains(2015))'">2015</MaxVersion>
+
+		<!-- version specific path selectors -->
+		<MaxPath Condition="'$(MaxVersion)'=='2012' and '$(Platform)'=='Win32'">$(ADSK_3DSMAX_x86_2012)</MaxPath>
+		<MaxPath Condition="'$(MaxVersion)'=='2013' and '$(Platform)'=='Win32'">$(ADSK_3DSMAX_x86_2013)</MaxPath>
+		<MaxPath Condition="'$(MaxVersion)'=='2014' and '$(Platform)'=='Win32'">$(ADSK_3DSMAX_x86_2014)</MaxPath>
+
+		<MaxPath Condition="'$(MaxVersion)'=='2012' and '$(Platform)'=='x64'">$(ADSK_3DSMAX_x64_2012)</MaxPath>
+		<MaxPath Condition="'$(MaxVersion)'=='2013' and '$(Platform)'=='x64'">$(ADSK_3DSMAX_x64_2013)</MaxPath>
+		<MaxPath Condition="'$(MaxVersion)'=='2014' and '$(Platform)'=='x64'">$(ADSK_3DSMAX_x64_2014)</MaxPath>
+		<MaxPath Condition="'$(MaxVersion)'=='2015' and '$(Platform)'=='x64'">$(ADSK_3DSMAX_x64_2015)</MaxPath>
+
+		<MaxSDKPath Condition="'$(MaxVersion)'=='2012'">$(ADSK_3DSMAX_SDK_2012)</MaxSDKPath>
+		<MaxSDKPath Condition="'$(MaxVersion)'=='2013'">$(ADSK_3DSMAX_SDK_2013)</MaxSDKPath>
+		<MaxSDKPath Condition="'$(MaxVersion)'=='2014'">$(ADSK_3DSMAX_SDK_2014)</MaxSDKPath>
+		<MaxSDKPath Condition="'$(MaxVersion)'=='2015'">$(ADSK_3DSMAX_SDK_2015)</MaxSDKPath>
+		
+		<!-- switcher for unicode build -->
+		<IsUnicode Condition="'$(MaxVersion)' &lt; '2013'">false</IsUnicode>
+		<IsUnicode Condition="'$(MaxVersion)' &gt; '2012'">true</IsUnicode>
+	</PropertyGroup>
+	<PropertyGroup Label="Configuration">
+		<UseOfMfc>false</UseOfMfc>
+		<UseOfAtl>false</UseOfAtl>
+		<PlatformToolset>v100</PlatformToolset>
+		<ConfigurationType>DynamicLibrary</ConfigurationType>
+		<CharacterSet>Unicode</CharacterSet>
+		<WholeProgramOptimization>false</WholeProgramOptimization>    
+		<TargetExt>.dlu</TargetExt>
+	</PropertyGroup>
+	<PropertyGroup Condition="!'$(IsUnicode)'" Label="Configuration">
+		<CharacterSet>MultiByte</CharacterSet>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(IsRelease)'" Label="Configuration">
+		<WholeProgramOptimization>true</WholeProgramOptimization>
+	</PropertyGroup>
+	
+	<!-- General properties for everyone -->
+	<PropertyGroup>
+		<OutDir>$(MaxPath)plugins\</OutDir>
+		<PlatformToolset>v100</PlatformToolset>
+		<PlatformToolset Condition="'$(MaxVersion)' &gt; '2014'">v110</PlatformToolset>
+		<ConfigurationType>DynamicLibrary</ConfigurationType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(IsDebug)'">
+		<UseDebugLibraries>true</UseDebugLibraries>
+	</PropertyGroup>
+	
+	<ItemDefinitionGroup>
+		<!-- default values for compiler -->
+		<ClCompile>
+			<AdditionalIncludeDirectories>$(MaxSDKPath)maxsdk\include;$(MAX_SRC_UTILITIES)/src/</AdditionalIncludeDirectories>
+			<WarningLevel>Level4</WarningLevel>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+			<RuntimeTypeInfo>true</RuntimeTypeInfo>
+			<StringPooling>true</StringPooling>
+			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+		</ClCompile>
+
+		<!-- We need to manually turn on x64, of all things -->
+		<ClCompile Condition="'$(Platform)'=='x64'">
+			<PreprocessorDefinitions>WIN64;_WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+		</ClCompile>
+
+		<!-- 2014 very helpfully changed the installed path -->
+		<ClCompile Condition="'$(MaxVersion)' &gt; '2013'">
+			<AdditionalIncludeDirectories>$(MaxSDKPath)\include;$(MAX_SRC_UTILITIES)/src/</AdditionalIncludeDirectories>
+		</ClCompile>
+		
+		<!-- Turn on E&C for Debug Win32 builds -->
+		<ClCompile Condition="'$(IsDebug)'">
+			<DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+			<WholeProgramOptimization>false</WholeProgramOptimization>
+			<SDLCheck>true</SDLCheck>
+			<Optimization>Disabled</Optimization>
+			<PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+		</ClCompile>
+		
+		<!-- Release specific compiler settings -->
+		<ClCompile Condition="'$(IsRelease)'">
+			<Optimization>MaxSpeed</Optimization>
+			<IntrinsicFunctions>true</IntrinsicFunctions>
+			<FavorSizeOrSpeed>speed</FavorSizeOrSpeed>
+			<PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<FunctionLevelLinking>true</FunctionLevelLinking>
+			<WholeProgramOptimization>true</WholeProgramOptimization>
+		</ClCompile>
+		
+		<!-- Linker Common Settings -->
+		<Link>
+			<LinkIncremental>true</LinkIncremental>
+			<GenerateDebugInformation>true</GenerateDebugInformation>
+			<SubSystem>Windows</SubSystem>
+			<AdditionalDependencies>assetmanagement.lib;atscore.lib;biped.lib;bmm.lib;core.lib;crowd.lib;custdlg.lib;databridge.lib;edmodel.lib;expr.lib;flt.lib;geom.lib;gfx.lib;GraphicsDriver.lib;gup.lib;igame.lib;imageviewers.lib;manipsys.lib;maxnet.lib;maxscrpt.lib;maxutil.lib;menuman.lib;menus.lib;mesh.lib;mnmath.lib;paramblk2.lib;particle.lib;particleflow.lib;physique.lib;poly.lib;polypaint.lib;renderutil.lib;rtmax.lib;tessint.lib;viewfile.lib;zlibdll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies Condition="'$(MaxVersion)'!='2012'">GraphicsUtility.lib;%(AdditionalDependencies)</AdditionalDependencies>
+		</Link>		
+		<Link Condition="'$(Platform)'=='Win32'">
+			<AdditionalLibraryDirectories>$(MaxSDKPath)maxsdk\lib\</AdditionalLibraryDirectories>
+		</Link>		
+		<Link Condition="'$(Platform)'=='x64'">
+			<AdditionalLibraryDirectories>$(MaxSDKPath)maxsdk\x64\lib\</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories Condition="'$(MaxVersion)' &gt; '2013'">$(MaxSDKPath)\lib\x64\Release\</AdditionalLibraryDirectories>
+		</Link>		
+	</ItemDefinitionGroup>
+
+	<PropertyGroup>
+		<LocalDebuggerCommand>$(MaxPath)3dsmax.exe</LocalDebuggerCommand>
+		<DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+	</PropertyGroup>
+
+
+	<ItemDefinitionGroup Condition="'$(IsRelease)'">
+		<PostBuildEvent>
+			<Command>
+				if not exist "$(SolutionDir)Dist/$(MaxVersion)/$(Platform)/" mkdir "$(SolutionDir)Dist/$(MaxVersion)/$(Platform)/"
+				copy "$(TargetPath)" "$(SolutionDir)Dist/$(MaxVersion)/$(Platform)/"
+				copy "$(TargetDir)$(TargetName).pdb" "$(SolutionDir)Dist/$(MaxVersion)/$(Platform)/"</Command>
+			<Message>Copy Release to DistFolder</Message>
+		</PostBuildEvent>
+	</ItemDefinitionGroup>
+
+	<ItemGroup>
+		<ClInclude Include="$(MAX_SRC_UTILITIES)/src/MaxVersionSelector.h" />
+	</ItemGroup>
+</Project>
