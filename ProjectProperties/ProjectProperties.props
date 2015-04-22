@@ -31,6 +31,9 @@
 		<!-- switcher for unicode build -->
 		<IsUnicode Condition="'$(MaxVersion)' &lt; '2013'">false</IsUnicode>
 		<IsUnicode Condition="'$(MaxVersion)' &gt; '2012'">true</IsUnicode>
+
+		<BuiltType Condition="'$(IsDebug)'">Debug</BuiltType>
+		<BuiltType Condition="'$(IsRelease)'">Release</BuiltType>
 	</PropertyGroup>
 	<PropertyGroup Label="Configuration">
 		<UseOfMfc>false</UseOfMfc>
@@ -50,10 +53,12 @@
 	
 	<!-- General properties for everyone -->
 	<PropertyGroup>
-		<OutDir>$(MaxPath)plugins\</OutDir>
+		<OutDir>$(SolutionDir)\Build\$(BuiltType)\$(MaxVersion)\$(Platform)\</OutDir>
+		<IntDir>$(SolutionDir)\Build\int\$(Configuration)\$(Platform)\</IntDir>
 		<PlatformToolset>v100</PlatformToolset>
 		<PlatformToolset Condition="'$(MaxVersion)' &gt; '2014'">v110</PlatformToolset>
 		<ConfigurationType>DynamicLibrary</ConfigurationType>
+		<UseNativeEnvironment>true</UseNativeEnvironment>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(IsDebug)'">
 		<UseDebugLibraries>true</UseDebugLibraries>
@@ -102,11 +107,12 @@
 		
 		<!-- Linker Common Settings -->
 		<Link>
-			<LinkIncremental>true</LinkIncremental>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<SubSystem>Windows</SubSystem>
 			<AdditionalDependencies>assetmanagement.lib;atscore.lib;biped.lib;bmm.lib;core.lib;crowd.lib;custdlg.lib;databridge.lib;edmodel.lib;expr.lib;flt.lib;geom.lib;gfx.lib;GraphicsDriver.lib;gup.lib;igame.lib;imageviewers.lib;manipsys.lib;maxnet.lib;maxscrpt.lib;maxutil.lib;menuman.lib;menus.lib;mesh.lib;mnmath.lib;paramblk2.lib;particle.lib;particleflow.lib;physique.lib;poly.lib;polypaint.lib;renderutil.lib;rtmax.lib;tessint.lib;viewfile.lib;zlibdll.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<AdditionalDependencies Condition="'$(MaxVersion)'!='2012'">GraphicsUtility.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<ProfileGuidedDatabase>$(IntDir)$(TargetName).pgd</ProfileGuidedDatabase>
+			<ImportLibrary>$(IntDir)\$(TargetName).lib</ImportLibrary>
 		</Link>		
 		<Link Condition="'$(Platform)'=='Win32'">
 			<AdditionalLibraryDirectories>$(MaxSDKPath)maxsdk\lib\</AdditionalLibraryDirectories>
@@ -126,9 +132,8 @@
 	<ItemDefinitionGroup Condition="'$(IsRelease)'">
 		<PostBuildEvent>
 			<Command>
-				if not exist "$(SolutionDir)Dist/$(MaxVersion)/$(Platform)/" mkdir "$(SolutionDir)Dist/$(MaxVersion)/$(Platform)/"
-				copy "$(TargetPath)" "$(SolutionDir)Dist/$(MaxVersion)/$(Platform)/"
-				copy "$(TargetDir)$(TargetName).pdb" "$(SolutionDir)Dist/$(MaxVersion)/$(Platform)/"</Command>
+				if exist "$(MaxPath)\plugins\" copy "$(TargetPath)" "$(MaxPath)\plugins\"
+			</Command>
 			<Message>Copy Release to DistFolder</Message>
 		</PostBuildEvent>
 	</ItemDefinitionGroup>
