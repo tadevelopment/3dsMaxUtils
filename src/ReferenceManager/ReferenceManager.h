@@ -644,6 +644,37 @@ protected:
 		return REF_SUCCEED;
 	}
 
+	// Set the callback for the specified reference
+	// This allows derived classes to override the parents
+	// callback if necessary.  This function will take
+	// ownership of the passed callback and will release it
+	// when no longer necessary.  The caller should not
+	// maintain a pointer to the callback
+	bool SetNotifyCallback(int i, NotifyCallback* pCallback)
+	{
+		RefInfo* pInfo = GetInfo(i);
+		if (pInfo == nullptr)
+		{
+			delete pCallback;
+			return false;
+		}
+		// If any callback existed prior, delete it.
+		delete pInfo->m_callback;
+		pInfo->m_callback = pCallback;
+		return true;
+	}
+
+	// Set the callback for the specified reference
+	// This allows derived classes to override the parents
+	// callback if necessary.  This function will take
+	// ownership of the passed callback and will release it
+	// when no longer necessary.  The caller should not
+	// maintain a pointer to the callback
+	bool SetNotifyCallback(ReferenceTarget* target, NotifyCallback* pCallback)
+	{
+		return SetNotifyCallback(FindRef(target), pCallback);
+	}
+
 	/// Private, local functions
 
 	int GetReferenceIndexForArray(size_t arrayIdx, size_t offset)
