@@ -129,7 +129,7 @@
 	</PropertyGroup>
 
 
-	<ItemDefinitionGroup Condition="'$(IsRelease)'">
+	<ItemDefinitionGroup>
 		<PostBuildEvent>
 			<Command>
 				if exist "$(MaxPath)\plugins\" copy "$(TargetPath)" "$(MaxPath)\plugins\"
