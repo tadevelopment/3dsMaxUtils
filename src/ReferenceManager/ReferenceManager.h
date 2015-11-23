@@ -231,7 +231,7 @@ protected:
             
             if (hTarget != NULL)
             {
-                int n = GetReferenceIndex(hTarget);
+                n = GetReferenceIndex(hTarget);
                 DbgAssert(n >= 0 && "Internal error, reference could not be found");
 
 #if kBaseIndex > 0 // Only compile this in if we have base references - otherwise we get compiler errors!
