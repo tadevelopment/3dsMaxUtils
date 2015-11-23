@@ -1,7 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup Label="ProjectConfigurations">
+		<ProjectConfiguration Include="Debug 2012|Win32">
+		  <Configuration>Debug 2012</Configuration>
+		  <Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Debug 2012|x64">
+		  <Configuration>Debug 2012</Configuration>
+		  <Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Debug 2013|Win32">
+		  <Configuration>Debug 2013</Configuration>
+		  <Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Debug 2013|x64">
+		  <Configuration>Debug 2013</Configuration>
+		  <Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Debug 2014|x64">
+		  <Configuration>Debug 2014</Configuration>
+		  <Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Debug 2015|x64">
+		  <Configuration>Debug 2015</Configuration>
+		  <Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Debug 2016|x64">
+		  <Configuration>Debug 2016</Configuration>
+		  <Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release 2012|Win32">
+		  <Configuration>Release 2012</Configuration>
+		  <Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release 2012|x64">
+		  <Configuration>Release 2012</Configuration>
+		  <Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release 2013|Win32">
+		  <Configuration>Release 2013</Configuration>
+		  <Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release 2013|x64">
+		  <Configuration>Release 2013</Configuration>
+		  <Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release 2014|x64">
+		  <Configuration>Release 2014</Configuration>
+		  <Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release 2015|x64">
+		  <Configuration>Release 2015</Configuration>
+		  <Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release 2016|x64">
+		  <Configuration>Release 2016</Configuration>
+		  <Platform>x64</Platform>
+		</ProjectConfiguration>
+	</ItemGroup>
+
 	<ImportGroup Label="PropertySheets" />
 	<PropertyGroup Label="UserMacros">
+
+		<!-- store the path to MaxSrcUtils folder, so we can reference our build tools -->
+		<MaxSrcUtils>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\'))</MaxSrcUtils>
+
 		<!-- selector for debug/release version -->
 		<IsDebug>$([System.Convert]::ToString( $([System.Text.RegularExpressions.Regex]::IsMatch($(Configuration), '[Dd]ebug'))))</IsDebug>
 		<IsRelease>$([System.Convert]::ToString( $([System.Text.RegularExpressions.Regex]::IsMatch($(Configuration), '[Rr]elease'))))</IsRelease>
@@ -153,7 +216,7 @@
 	<ItemDefinitionGroup>
 		<PostBuildEvent>
 			<Command>
-				call "$(ProjectDir)..\GeneratePluginIni.bat" "$(GeneratedPluginIni)" "$(MaxVersion)"
+				call "$(MaxSrcUtils)GeneratePluginIni.bat" "$(GeneratedPluginIni)" "$(MaxVersion)"
 				echo $(MaxPath)3dsmax.exe -p "$(GeneratedPluginIni)"
 			</Command>
 			<Message>Generating Plugin.Ini file</Message>
