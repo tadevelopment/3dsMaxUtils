@@ -170,7 +170,7 @@
 			<WholeProgramOptimization>false</WholeProgramOptimization>
 			<SDLCheck>true</SDLCheck>
 			<Optimization>Disabled</Optimization>
-			<PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<PreprocessorDefinitions>_DEBUG;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 		</ClCompile>
 		
