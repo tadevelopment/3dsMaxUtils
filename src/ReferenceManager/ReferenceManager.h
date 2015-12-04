@@ -727,8 +727,8 @@ protected:
 			return;
 
 		// Sanity checking only.
-		int total = m_baseDynIdx;
-		for (int i = idx; i < m_arraySizes.size(); i++)
+		size_t total = m_baseDynIdx;
+		for (int i = 0; i < m_arraySizes.size(); i++)
 			total += m_arraySizes.size();
 		DbgAssert(total == NumRefs());
 #endif
