@@ -147,7 +147,7 @@
 	<ItemDefinitionGroup>
 		<!-- default values for compiler -->
 		<ClCompile>
-			<AdditionalIncludeDirectories>$(MaxSDKPath)maxsdk\include;$(MAX_SRC_UTILITIES)/src/</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>$(MaxSDKPath)maxsdk\include;$(MaxSrcUtils)/src/</AdditionalIncludeDirectories>
 			<WarningLevel>Level4</WarningLevel>
 			<RuntimeTypeInfo>true</RuntimeTypeInfo>
 			<StringPooling>true</StringPooling>
@@ -161,7 +161,7 @@
 
 		<!-- 2014 very helpfully changed the installed path -->
 		<ClCompile Condition="'$(MaxVersion)' &gt; '2013'">
-			<AdditionalIncludeDirectories>$(MaxSDKPath)\include;$(MAX_SRC_UTILITIES)/src/</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>$(MaxSDKPath)\include;$(MaxSrcUtils)/src/</AdditionalIncludeDirectories>
 		</ClCompile>
 		
 		<!-- Turn on E&C for Debug Win32 builds -->
@@ -224,6 +224,6 @@
 	</ItemDefinitionGroup>
 
 	<ItemGroup>
-		<ClInclude Include="$(MAX_SRC_UTILITIES)/src/MaxVersionSelector.h" />
+		<ClInclude Include="$(MaxSrcUtils)/src/MaxVersionSelector.h" />
 	</ItemGroup>
 </Project>
