@@ -121,8 +121,8 @@
 	
 	<!-- General properties for everyone -->
 	<PropertyGroup>
-		<OutDir>$(SolutionDir)\Build\$(BuiltType)\$(MaxVersion)\$(Platform)\</OutDir>
-		<IntDir>$(SolutionDir)\Build\int\$(Configuration)\$(Platform)\</IntDir>
+		<OutDir>$(SolutionDir)Build\$(BuiltType)\$(MaxVersion)\$(Platform)\</OutDir>
+		<IntDir>$(SolutionDir)Build\int\$(Configuration)\$(Platform)\</IntDir>
 		<PlatformToolset>v100</PlatformToolset>
 		<PlatformToolset Condition="'$(MaxVersion)' &gt; '2014'">v110</PlatformToolset>
 		<ConfigurationType>DynamicLibrary</ConfigurationType>
