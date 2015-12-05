@@ -31,6 +31,8 @@
 /// The template parameter Base_T is used as the Base class. 
 //=========================================================
 
+#define FINAL final
+
 template<typename Base_T, int USE_BASE_REF=0>
 class ReferenceManager 
     : public Base_T, public virtual IReferenceManager
@@ -138,14 +140,14 @@ protected:
 public:
 
 	/// Return the total references managed by this class
-	virtual int NumRefs() 
+	virtual int NumRefs() FINAL
     {
 		// Allow for parent classes with references
         return kBaseIndex + (int)m_refs.length();
     }
 
 	/// Returns a pointer to the i'th reference
-    virtual RefTargetHandle GetReference(int i) 
+    virtual RefTargetHandle GetReference(int i) FINAL
     {
 #if kBaseIndex != 0 // Compiling this with kBaseIndex == 0 produces a warning (conditional expression is constant)
 		// Allow for parent classes with references
@@ -211,7 +213,7 @@ protected:
 
 	// A default implementation simply manages reference deletion.  Override this function
 	// to handle any specific reference changes.
-    virtual RefResult NOTIFY_REF_CHANGED_FN_DECL
+    virtual RefResult NOTIFY_REF_CHANGED_FN_DECL FINAL
    	{
 		UNUSED_PARAM(changeInt);
 #if MAX_VERSION_MAJOR > 16
@@ -253,7 +255,7 @@ protected:
 private:
 
 	// Internal only.  Do not call this function.
-	virtual void SetReference(int i, RefTargetHandle rtarg) 
+	virtual void SetReference(int i, RefTargetHandle rtarg) FINAL
 	{ 
 		DbgAssert(IsValidReferenceIndex(i));
 		if(i < kBaseIndex)
