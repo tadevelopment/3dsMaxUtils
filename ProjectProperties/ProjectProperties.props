@@ -48,7 +48,6 @@
 	<PropertyGroup Label="Configuration">
 		<UseOfMfc>false</UseOfMfc>
 		<UseOfAtl>false</UseOfAtl>
-		<PlatformToolset>v100</PlatformToolset>
 		<ConfigurationType>DynamicLibrary</ConfigurationType>
 		<CharacterSet>Unicode</CharacterSet>
 		<WholeProgramOptimization>false</WholeProgramOptimization>    
@@ -64,7 +63,6 @@
 	
 	<!-- General properties for everyone -->
 	<PropertyGroup>
-		<OutDir>$(SolutionDir)Build\$(BuiltType)\$(MaxVersion)\$(Platform)\</OutDir>
 		<IntDir>$(SolutionDir)Build\int\$(Configuration)\$(Platform)\</IntDir>
 		<PlatformToolset>v100</PlatformToolset>
 		<PlatformToolset Condition="'$(MaxVersion)' &gt; '2014'">v110</PlatformToolset>
@@ -73,6 +71,11 @@
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(IsDebug)'">
 		<UseDebugLibraries>true</UseDebugLibraries>
+		<OutDir>$(SolutionDir)Build\$(BuiltType)\$(Configuration.Substring(6))\$(Platform)\</OutDir>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(IsRelease)'">
+		<UseDebugLibraries>false</UseDebugLibraries>
+		<OutDir>$(SolutionDir)Build\$(BuiltType)\$(Configuration.Substring(8))\$(Platform)\</OutDir>
 	</PropertyGroup>
 
 	<!-- Set appropriate compiler version -->
