@@ -31,7 +31,13 @@
 /// The template parameter Base_T is used as the Base class. 
 //=========================================================
 
+#if _MSC_VER > 1600
 #define FINAL final
+#endif
+
+#ifndef FINAL
+#define FINAL
+#endif
 
 template<typename Base_T, int USE_BASE_REF=0>
 class ReferenceManager 
