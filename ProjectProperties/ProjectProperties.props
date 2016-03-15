@@ -63,6 +63,7 @@
 	
 	<!-- General properties for everyone -->
 	<PropertyGroup>
+		<OutDir>$(SolutionDir)Build\$(BuiltType)\$(Configuration)\$(Platform)\</OutDir>
 		<IntDir>$(SolutionDir)Build\int\$(Configuration)\$(Platform)\</IntDir>
 		<PlatformToolset>v100</PlatformToolset>
 		<PlatformToolset Condition="'$(MaxVersion)' &gt; '2014'">v110</PlatformToolset>
@@ -71,11 +72,11 @@
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(IsDebug)'">
 		<UseDebugLibraries>true</UseDebugLibraries>
-		<OutDir>$(SolutionDir)Build\$(BuiltType)\$(Configuration.Substring(6))\$(Platform)\</OutDir>
+		<OutDir Condition="$(Configuration.Length) &gt; 6">$(SolutionDir)Build\$(BuiltType)\$(Configuration.Substring(6))\$(Platform)\</OutDir>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(IsRelease)'">
 		<UseDebugLibraries>false</UseDebugLibraries>
-		<OutDir>$(SolutionDir)Build\$(BuiltType)\$(Configuration.Substring(8))\$(Platform)\</OutDir>
+		<OutDir Condition="$(Configuration.Length) &gt; 8">$(SolutionDir)Build\$(BuiltType)\$(Configuration.Substring(8))\$(Platform)\</OutDir>
 	</PropertyGroup>
 
 	<!-- Set appropriate compiler version -->
