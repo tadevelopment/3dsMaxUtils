@@ -1,5 +1,3 @@
-#include "StdAfx.h"
-
 #include "DataRestoreObj.h"
 #include <list>
 #include <map>
@@ -96,11 +94,11 @@ bool IsTabPointerHeld(void* ptr, int index)
 {
 	TabMap &theMap = TabMap::GetTabMap();
 	// First try and find the tab, if it's held
-	TabMap::iterator itr = theMap.find(ptr);
-	if (itr != theMap.end())
+	TabMap::iterator tabitr = theMap.find(ptr);
+	if (tabitr != theMap.end())
 	{
 		// If the tab is held, was this particular index held?
-		std::list<int>& heldIndices = itr->second;
+		std::list<int>& heldIndices = tabitr->second;
 		for (std::list<int>::iterator itr = heldIndices.begin(); itr != heldIndices.end(); itr++)
 		{
 			if (*itr == index)
