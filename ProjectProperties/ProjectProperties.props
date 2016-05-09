@@ -38,7 +38,7 @@
 		<MaxSDKPath Condition="'$(MaxVersion)'=='2014'">$(ADSK_3DSMAX_SDK_2014)</MaxSDKPath>
 		<MaxSDKPath Condition="'$(MaxVersion)'=='2015'">$(ADSK_3DSMAX_SDK_2015)</MaxSDKPath>
 		<MaxSDKPath Condition="'$(MaxVersion)'=='2016'">$(ADSK_3DSMAX_SDK_2016)</MaxSDKPath>
-		<MaxSDKPath Condition="'$(MaxVersion)'=='2017'">$(ADSK_3DSMAX_SDK_2016)</MaxSDKPath>
+		<MaxSDKPath Condition="'$(MaxVersion)'=='2017'">$(ADSK_3DSMAX_SDK_2017)</MaxSDKPath>
 		
 		<!-- switcher for unicode build -->
 		<IsUnicode Condition="'$(MaxVersion)' &lt; '2013'">false</IsUnicode>
