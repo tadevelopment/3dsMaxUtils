@@ -87,6 +87,7 @@
 		<PlatformToolset>v90</PlatformToolset>
 		<PlatformToolset Condition="'$(MaxVersion)' &gt; '2012'">v100</PlatformToolset>
 		<PlatformToolset Condition="'$(MaxVersion)' &gt; '2014'">v110</PlatformToolset>
+		<PlatformToolset Condition="'$(MaxVersion)' &gt; '2016'">v140</PlatformToolset>
 	</PropertyGroup>
 
 	<!-- For debug, we always go with VS2015, x64 EnC Baby! -->

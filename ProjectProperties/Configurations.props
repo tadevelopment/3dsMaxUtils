@@ -30,7 +30,7 @@
           <Platform>x64</Platform>
         </ProjectConfiguration>
         <ProjectConfiguration Include="Debug 2017|x64">
-          <Configuration>Debug 2016</Configuration>
+          <Configuration>Debug 2017</Configuration>
           <Platform>x64</Platform>
         </ProjectConfiguration>
         <ProjectConfiguration Include="Release 2012|Win32">
@@ -62,7 +62,7 @@
           <Platform>x64</Platform>
         </ProjectConfiguration>
         <ProjectConfiguration Include="Release 2017|x64">
-          <Configuration>Release 2016</Configuration>
+          <Configuration>Release 2017</Configuration>
           <Platform>x64</Platform>
         </ProjectConfiguration>
     </ItemGroup>
