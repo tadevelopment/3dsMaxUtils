@@ -29,6 +29,10 @@
           <Configuration>Debug 2016</Configuration>
           <Platform>x64</Platform>
         </ProjectConfiguration>
+        <ProjectConfiguration Include="Debug 2017|x64">
+          <Configuration>Debug 2016</Configuration>
+          <Platform>x64</Platform>
+        </ProjectConfiguration>
         <ProjectConfiguration Include="Release 2012|Win32">
           <Configuration>Release 2012</Configuration>
           <Platform>Win32</Platform>
@@ -54,6 +58,10 @@
           <Platform>x64</Platform>
         </ProjectConfiguration>
         <ProjectConfiguration Include="Release 2016|x64">
+          <Configuration>Release 2016</Configuration>
+          <Platform>x64</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Release 2017|x64">
           <Configuration>Release 2016</Configuration>
           <Platform>x64</Platform>
         </ProjectConfiguration>
