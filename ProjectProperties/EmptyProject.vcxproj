@@ -2,12 +2,12 @@
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="3dsMaxUtils\ProjectProperties\ProjectProperties.props" />
   <PropertyGroup Label="Globals">
-    <ProjectName>MultiTexture</ProjectName>
+    <ProjectName>$(MSBuildProjectName)</ProjectName>
     <ProjectGuid>{E7CB76AA-6113-46BA-8EBC-8AE1D2B81210}</ProjectGuid>
-    <RootNamespace>MultiTexture</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
-    <TargetExt>.dlt</TargetExt>
+    <!-- Re-enable the below property to set the output file extension -->
+    <!--TargetExt>.dlt</TargetExt -->
   </PropertyGroup>
   <!-- Add in ItemGroup below this line -->
 
