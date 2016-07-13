@@ -15,3 +15,9 @@ References
 ==========
 
 The RefMgr and RefPtr system implement 3ds max's reference system in a safe and consistent manner.  Instructions on how to use them are included in the comments in the header files.
+
+
+ProjectProperties
+=================
+
+Additional instructions can be found under the ProjectPr
