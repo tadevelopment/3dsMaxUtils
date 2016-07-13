@@ -20,4 +20,6 @@ The RefMgr and RefPtr system implement 3ds max's reference system in a safe and 
 ProjectProperties
 =================
 
-Additional instructions can be found under the ProjectPr
+This utility handles setting up projects quickly and painlessly for a much improved experience.  It is updated quickly and ensures optimal configuration settings are applied for every release of Max from version 2012 onwards.
+
+Instructions for usage and converting existing projects to use the project properties can be found under in ProjectProperties/README.md
