@@ -54,7 +54,6 @@
 		<ConfigurationType>DynamicLibrary</ConfigurationType>
 		<CharacterSet>Unicode</CharacterSet>
 		<WholeProgramOptimization>false</WholeProgramOptimization>    
-		<TargetExt>.dlu</TargetExt>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="!'$(IsUnicode)'" Label="Configuration">
@@ -153,6 +152,8 @@
 		<Link Condition="'$(Platform)'=='x64'">
 			<AdditionalLibraryDirectories>$(MaxSDKPath)maxsdk\x64\lib\</AdditionalLibraryDirectories>
 			<AdditionalLibraryDirectories Condition="'$(MaxVersion)' &gt; '2013'">$(MaxSDKPath)\lib\x64\Release\</AdditionalLibraryDirectories>
+
+			<ModuleDefinitionFile>$(MaxSrcUtils)ProjectProperties\ExportedFns.def</ModuleDefinitionFile>
 		</Link>		
 	</ItemDefinitionGroup>
 
@@ -181,4 +182,9 @@
 	<!-- The remaining MSBuild imports. -->
 	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
 	<Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+
+	<!-- Set the Target Ext last, as it can be overwritten by the above -->
+	<PropertyGroup>
+		<TargetExt>.dlu</TargetExt>
+	</PropertyGroup>
 </Project>
