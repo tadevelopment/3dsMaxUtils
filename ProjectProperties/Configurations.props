@@ -37,6 +37,10 @@
           <Configuration>Debug 2018</Configuration>
           <Platform>x64</Platform>
         </ProjectConfiguration>
+        <ProjectConfiguration Include="Debug 2019|x64">
+          <Configuration>Debug 2019</Configuration>
+          <Platform>x64</Platform>
+        </ProjectConfiguration>
         <ProjectConfiguration Include="Release 2012|Win32">
           <Configuration>Release 2012</Configuration>
           <Platform>Win32</Platform>
@@ -71,6 +75,10 @@
         </ProjectConfiguration>
         <ProjectConfiguration Include="Release 2018|x64">
           <Configuration>Release 2018</Configuration>
+          <Platform>x64</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Release 2019|x64">
+          <Configuration>Release 2019</Configuration>
           <Platform>x64</Platform>
         </ProjectConfiguration>
     </ItemGroup>
