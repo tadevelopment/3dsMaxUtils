@@ -23,6 +23,7 @@
 		<MaxVersion Condition="'$(Configuration.Contains(2017))'">2017</MaxVersion>
 		<MaxVersion Condition="'$(Configuration.Contains(2018))'">2018</MaxVersion>
 		<MaxVersion Condition="'$(Configuration.Contains(2019))'">2019</MaxVersion>
+		<MaxVersion Condition="'$(Configuration.Contains(2020))'">2020</MaxVersion>
 
 		<!-- version specific path selectors -->
 		<MaxPath Condition="'$(MaxVersion)'=='2012' and '$(Platform)'=='Win32'">$(ADSK_3DSMAX_x86_2012)</MaxPath>
@@ -36,6 +37,7 @@
 		<MaxPath Condition="'$(MaxVersion)'=='2017' and '$(Platform)'=='x64'">$(ADSK_3DSMAX_x64_2017)</MaxPath>
 		<MaxPath Condition="'$(MaxVersion)'=='2018' and '$(Platform)'=='x64'">$(ADSK_3DSMAX_x64_2018)</MaxPath>
 		<MaxPath Condition="'$(MaxVersion)'=='2019' and '$(Platform)'=='x64'">$(ADSK_3DSMAX_x64_2019)</MaxPath>
+		<MaxPath Condition="'$(MaxVersion)'=='2020' and '$(Platform)'=='x64'">$(ADSK_3DSMAX_x64_2020)</MaxPath>
 
 		<MaxSDKPath Condition="'$(MaxVersion)'=='2012'">$(ADSK_3DSMAX_SDK_2012)</MaxSDKPath>
 		<MaxSDKPath Condition="'$(MaxVersion)'=='2013'">$(ADSK_3DSMAX_SDK_2013)</MaxSDKPath>
@@ -45,6 +47,7 @@
 		<MaxSDKPath Condition="'$(MaxVersion)'=='2017'">$(ADSK_3DSMAX_SDK_2017)</MaxSDKPath>
 		<MaxSDKPath Condition="'$(MaxVersion)'=='2018'">$(ADSK_3DSMAX_SDK_2018)</MaxSDKPath>
 		<MaxSDKPath Condition="'$(MaxVersion)'=='2019'">$(ADSK_3DSMAX_SDK_2019)</MaxSDKPath>
+		<MaxSDKPath Condition="'$(MaxVersion)'=='2020'">$(ADSK_3DSMAX_SDK_2020)</MaxSDKPath>
 		
 		<!-- switcher for unicode build -->
 		<IsUnicode Condition="'$(MaxVersion)' &lt; '2013'">false</IsUnicode>
