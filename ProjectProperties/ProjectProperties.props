@@ -24,6 +24,8 @@
 		<MaxVersion Condition="'$(Configuration.Contains(2018))'">2018</MaxVersion>
 		<MaxVersion Condition="'$(Configuration.Contains(2019))'">2019</MaxVersion>
 		<MaxVersion Condition="'$(Configuration.Contains(2020))'">2020</MaxVersion>
+		<MaxVersion Condition="'$(Configuration.Contains(2021))'">2021</MaxVersion>
+		<MaxVersion Condition="'$(Configuration.Contains(2022))'">2022</MaxVersion>
 
 		<!-- version specific path selectors -->
 		<MaxPath Condition="'$(MaxVersion)'=='2012' and '$(Platform)'=='Win32'">$(ADSK_3DSMAX_x86_2012)</MaxPath>
@@ -38,6 +40,8 @@
 		<MaxPath Condition="'$(MaxVersion)'=='2018' and '$(Platform)'=='x64'">$(ADSK_3DSMAX_x64_2018)</MaxPath>
 		<MaxPath Condition="'$(MaxVersion)'=='2019' and '$(Platform)'=='x64'">$(ADSK_3DSMAX_x64_2019)</MaxPath>
 		<MaxPath Condition="'$(MaxVersion)'=='2020' and '$(Platform)'=='x64'">$(ADSK_3DSMAX_x64_2020)</MaxPath>
+		<MaxPath Condition="'$(MaxVersion)'=='2021' and '$(Platform)'=='x64'">$(ADSK_3DSMAX_x64_2021)</MaxPath>
+		<MaxPath Condition="'$(MaxVersion)'=='2022' and '$(Platform)'=='x64'">$(ADSK_3DSMAX_x64_2022)</MaxPath>
 
 		<MaxSDKPath Condition="'$(MaxVersion)'=='2012'">$(ADSK_3DSMAX_SDK_2012)</MaxSDKPath>
 		<MaxSDKPath Condition="'$(MaxVersion)'=='2013'">$(ADSK_3DSMAX_SDK_2013)</MaxSDKPath>
@@ -48,6 +52,8 @@
 		<MaxSDKPath Condition="'$(MaxVersion)'=='2018'">$(ADSK_3DSMAX_SDK_2018)</MaxSDKPath>
 		<MaxSDKPath Condition="'$(MaxVersion)'=='2019'">$(ADSK_3DSMAX_SDK_2019)</MaxSDKPath>
 		<MaxSDKPath Condition="'$(MaxVersion)'=='2020'">$(ADSK_3DSMAX_SDK_2020)</MaxSDKPath>
+		<MaxSDKPath Condition="'$(MaxVersion)'=='2021'">$(ADSK_3DSMAX_SDK_2021)</MaxSDKPath>
+		<MaxSDKPath Condition="'$(MaxVersion)'=='2022'">$(ADSK_3DSMAX_SDK_2022)</MaxSDKPath>
 		
 		<!-- switcher for unicode build -->
 		<IsUnicode Condition="'$(MaxVersion)' &lt; '2013'">false</IsUnicode>
@@ -96,11 +102,12 @@
 		<PlatformToolset Condition="'$(MaxVersion)' &gt; '2012'">v100</PlatformToolset>
 		<PlatformToolset Condition="'$(MaxVersion)' &gt; '2014'">v110</PlatformToolset>
 		<PlatformToolset Condition="'$(MaxVersion)' &gt; '2016'">v140</PlatformToolset>
+		<PlatformToolset Condition="'$(MaxVersion)' &gt; '2019'">v141</PlatformToolset>
 	</PropertyGroup>
 
 	<!-- For debug, we always go with VS2015, x64 EnC Baby! -->
 	<PropertyGroup Condition="'$(IsDebug)'"> <!-- VS 2015 -->
-		<PlatformToolset>v140</PlatformToolset>
+		<PlatformToolset>v141</PlatformToolset>
 	</PropertyGroup>
 	
 	<ItemDefinitionGroup>
@@ -148,7 +155,7 @@
 		<Link>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<SubSystem>Windows</SubSystem>
-			<AdditionalDependencies>assetmanagement.lib;atscore.lib;biped.lib;bmm.lib;core.lib;crowd.lib;custdlg.lib;databridge.lib;edmodel.lib;expr.lib;flt.lib;geom.lib;gfx.lib;GraphicsDriver.lib;gup.lib;igame.lib;imageviewers.lib;manipsys.lib;maxnet.lib;maxscrpt.lib;maxutil.lib;menuman.lib;menus.lib;mesh.lib;mnmath.lib;paramblk2.lib;particle.lib;particleflow.lib;physique.lib;poly.lib;polypaint.lib;renderutil.lib;rtmax.lib;tessint.lib;viewfile.lib;zlibdll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>assetmanagement.lib;atscore.lib;biped.lib;bmm.lib;core.lib;crowd.lib;custdlg.lib;databridge.lib;edmodel.lib;expr.lib;flt.lib;geom.lib;gfx.lib;GraphicsDriver.lib;gup.lib;igame.lib;imageviewers.lib;manipsys.lib;maxnet.lib;maxscrpt.lib;maxutil.lib;menuman.lib;menus.lib;mesh.lib;mnmath.lib;paramblk2.lib;particle.lib;particleflow.lib;physique.lib;poly.lib;polypaint.lib;renderutil.lib;rtmax.lib;tessint.lib;viewfile.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<AdditionalDependencies Condition="'$(MaxVersion)'!='2012'">GraphicsUtility.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<AdditionalDependencies Condition="'$(MaxVersion)' &gt; '2014'">DefaultRenderItems.lib;FragmentGraph.lib;GraphicsUtility.lib;MaxGraphicsObjects.lib;ParticleFlowTools.lib;populate.lib;RenderUtil.lib;spring.lib;ViewSystem.lib;%(AdditionalDependencies)</AdditionalDependencies>
 
