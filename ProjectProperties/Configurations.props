@@ -53,6 +53,10 @@
           <Configuration>Debug 2022</Configuration>
           <Platform>x64</Platform>
         </ProjectConfiguration>
+        <ProjectConfiguration Include="Debug 2023|x64">
+          <Configuration>Debug 2023</Configuration>
+          <Platform>x64</Platform>
+        </ProjectConfiguration>
         <ProjectConfiguration Include="Release 2012|Win32">
           <Configuration>Release 2012</Configuration>
           <Platform>Win32</Platform>
@@ -103,6 +107,10 @@
         </ProjectConfiguration>
         <ProjectConfiguration Include="Release 2022|x64">
           <Configuration>Release 2022</Configuration>
+          <Platform>x64</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Release 2023|x64">
+          <Configuration>Release 2023</Configuration>
           <Platform>x64</Platform>
         </ProjectConfiguration>
     </ItemGroup>
