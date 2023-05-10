@@ -57,7 +57,7 @@
           <Configuration>Debug 2023</Configuration>
           <Platform>x64</Platform>
         </ProjectConfiguration>
-        <ProjectConfiguration Include="Debug 2023|x64">
+        <ProjectConfiguration Include="Debug 2024|x64">
           <Configuration>Debug 2024</Configuration>
           <Platform>x64</Platform>
         </ProjectConfiguration>
@@ -117,7 +117,7 @@
           <Configuration>Release 2023</Configuration>
           <Platform>x64</Platform>
         </ProjectConfiguration>
-        <ProjectConfiguration Include="Release 2023|x64">
+        <ProjectConfiguration Include="Release 2024|x64">
           <Configuration>Release 2024</Configuration>
           <Platform>x64</Platform>
         </ProjectConfiguration>

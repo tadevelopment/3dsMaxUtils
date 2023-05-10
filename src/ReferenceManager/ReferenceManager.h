@@ -39,6 +39,8 @@
 #define FINAL
 #endif
 
+using namespace std;
+
 template<typename Base_T, int USE_BASE_REF=0>
 class ReferenceManager 
     : public Base_T, public virtual IReferenceManager
